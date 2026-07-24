@@ -1,18 +1,40 @@
-sudo apt install -y libpq-dev postgresql-client
+# Web Resume — Best Patcharapon
 
-ruby 3.1.2
-rbenv install 3.1.2
-sudo apt install ruby-railties
-gem install bundler
-bundle install
-EDITOR="code --wait" rails credentials:edit
-compile assets
-RAILS_ENV=production bundle exec rake assets:precompile
+Personal portfolio website built with **Next.js 15 + React 19** (migrated from Ruby on Rails).
+Features a responsive bento-grid design, interactive profile card stack, animated skill marquee,
+projects carousel with lightbox, and an AI chatbot powered by Groq.
 
-test on local
-RAILS_ENV=production bundle exec rails s
+## Setup
 
-docker-compose up -d --build
+```bash
+npm install
+```
 
-logs
-docker-compose logs web
+Create `.env.local` with your Groq API keys (get one at https://console.groq.com):
+
+```
+GROQ_API_KEY=your_key_here
+GROQ_API_KEY_2=your_backup_key_here   # optional fallback
+```
+
+Never commit `.env.local` — it is gitignored.
+
+## Development
+
+```bash
+npm run dev
+```
+
+Open http://localhost:3002
+
+## Production
+
+```bash
+npm run build
+npm start
+```
+
+## Editing content
+
+All resume data (skills, projects, experiences, typing texts) lives in `lib/data.js`.
+Styles are in `app/homepage.css` and `app/chatbot.css`.
