@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Waste sorting rewards app illustration">
+  <title>Traili Testing</title>
+  <rect width="800" height="450" fill="#eef6ee"/>
+  <circle cx="650" cy="120" r="140" fill="#27ae60" opacity="0.08"/>
+  <circle cx="140" cy="360" r="120" fill="#27ae60" opacity="0.08"/>
+
+  <line x1="60" y1="380" x2="740" y2="380" stroke="#d9e8da" stroke-width="3"/>
+
+  <!-- Recycling bin -->
+  <g>
+    <rect x="455" y="200" width="170" height="26" rx="8" fill="#27ae60"/>
+    <path d="M470 220 h140 l-13 148 a14 14 0 0 1 -14 13 h-86 a14 14 0 0 1 -14 -13 z" fill="#ffffff" stroke="#27ae60" stroke-width="4"/>
+    <line x1="503" y1="248" x2="494" y2="358" stroke="#27ae60" stroke-width="4" opacity="0.5"/>
+    <line x1="540" y1="248" x2="540" y2="362" stroke="#27ae60" stroke-width="4" opacity="0.5"/>
+    <line x1="577" y1="248" x2="586" y2="358" stroke="#27ae60" stroke-width="4" opacity="0.5"/>
+  </g>
+
+  <!-- Phone with recycle icon -->
+  <g>
+    <rect x="180" y="140" width="180" height="300" rx="26" fill="#ffffff" stroke="#27ae60" stroke-width="5"/>
+    <rect x="200" y="170" width="140" height="240" rx="10" fill="#e6f5ea"/>
+    <circle cx="270" cy="285" r="48" fill="#27ae60"/>
+    <g transform="translate(270,285)" fill="#ffffff" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <g transform="rotate(0)">
+        <polyline points="-8,-28 18,-28 18,-4" fill="none"/>
+        <polygon points="18,-38 32,-22 6,-22" stroke="none"/>
+      </g>
+      <g transform="rotate(120)">
+        <polyline points="-8,-28 18,-28 18,-4" fill="none"/>
+        <polygon points="18,-38 32,-22 6,-22" stroke="none"/>
+      </g>
+      <g transform="rotate(240)">
+        <polyline points="-8,-28 18,-28 18,-4" fill="none"/>
+        <polygon points="18,-38 32,-22 6,-22" stroke="none"/>
+      </g>
+    </g>
+    <circle cx="270" cy="388" r="8" fill="#27ae60"/>
+  </g>
+
+  <!-- Leaves -->
+  <g fill="#27ae60" opacity="0.65">
+    <path d="M110 210 q30 -42 60 0 q-30 42 -60 0 z"/>
+    <path d="M650 300 q30 -42 60 0 q-30 42 -60 0 z"/>
+  </g>
+</svg>

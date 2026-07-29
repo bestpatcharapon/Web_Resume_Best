@@ -5,10 +5,14 @@ import SkillsSection from "../components/SkillsSection";
 import ProjectsSection from "../components/ProjectsSection";
 import ExperienceSection from "../components/ExperienceSection";
 import Chatbot from "../components/Chatbot";
+import ScrollProgress from "../components/ScrollProgress";
+import CursorGlow from "../components/CursorGlow";
 
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
+      <CursorGlow />
       <div className="bento-container">
         <Header />
 

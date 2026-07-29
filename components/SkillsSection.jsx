@@ -1,17 +1,17 @@
 import { Icon } from "./Icon";
+import Reveal from "./Reveal";
+import SkillBar from "./SkillBar";
 import { softSkills, techSkillsGrouped } from "../lib/data";
 
-function SkillItem({ iconClass, name, percentage }) {
+function SkillItem({ iconClass, name, percentage, delay }) {
   return (
-    <div className="skill-item-enhanced">
+    <Reveal as="div" className="skill-item-enhanced" delay={delay}>
       <div className="skill-header">
         <i className={`${iconClass} skill-icon`}></i>
         <span className="skill-name">{name}</span>
       </div>
-      <div className="skill-bar">
-        <div className="skill-progress" style={{ width: `${percentage}%` }}></div>
-      </div>
-    </div>
+      <SkillBar percentage={percentage} />
+    </Reveal>
   );
 }
 
@@ -63,8 +63,8 @@ export default function SkillsSection() {
             Soft Skills
           </div>
           <div className="skills-grid-two-col">
-            {softSkills.map((skill) => (
-              <SkillItem key={skill.name} {...skill} />
+            {softSkills.map((skill, index) => (
+              <SkillItem key={skill.name} {...skill} delay={index * 60} />
             ))}
           </div>
           <p className="footer-note" style={{ marginTop: "0.75rem" }}>

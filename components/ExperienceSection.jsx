@@ -1,9 +1,10 @@
 import { Icon } from "./Icon";
+import Reveal from "./Reveal";
 import { experiences } from "../lib/data";
 
-function TimelineItem({ experience, active }) {
+function TimelineItem({ experience, active, delay }) {
   return (
-    <div className="timeline-item">
+    <Reveal as="div" className="timeline-item" delay={delay}>
       <div className={`timeline-marker ${active ? "active" : ""}`}></div>
       <div className={`timeline-content ${active ? "active" : ""}`}>
         <div className="timeline-period-wrapper">
@@ -28,7 +29,7 @@ function TimelineItem({ experience, active }) {
           </div>
         )}
       </div>
-    </div>
+    </Reveal>
   );
 }
 
@@ -45,7 +46,12 @@ export default function ExperienceSection() {
 
       <div className="timeline">
         {experiences.map((exp, index) => (
-          <TimelineItem key={exp.title} experience={exp} active={index === 0} />
+          <TimelineItem
+            key={exp.title}
+            experience={exp}
+            active={index === 0}
+            delay={Math.min(index, 5) * 70}
+          />
         ))}
       </div>
     </section>

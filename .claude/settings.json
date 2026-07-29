@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wsl.exe -d Ubuntu-24.04 -e bash -lc 'curl -s http://localhost:3002 | grep -o \"class=\\\\\\\\\"action-buttons\\\\\\\\\">.\\\\{0,600\\\\}\"')",
+      "Bash(wsl.exe -d Ubuntu-24.04 -e bash -lc \"curl -s http://localhost:3002 -o /tmp/page.html; python3 -c \\\\\"import re; s=open\\('/tmp/page.html'\\).read\\(\\); i=s.find\\('action-buttons'\\); print\\(s[i-20:i+700]\\)\\\\\"\")",
+      "Bash(wsl.exe -d Ubuntu-24.04 -e bash -lc \"python3 -c \\\\\"s=open\\('/tmp/page.html'\\).read\\(\\); i=s.find\\('Download CV'\\); print\\(s[i-400:i+50]\\)\\\\\"\")",
+      "Bash(wsl.exe -d Ubuntu-24.04 -e bash -lc 'ps aux | grep -i \"next dev\" | grep -v grep')"
+    ]
+  }
+}

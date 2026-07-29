@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Icon, IconFilled } from "./Icon";
 import TypingName from "./TypingName";
 
@@ -19,6 +22,8 @@ const INFO_CARDS = [
 ];
 
 export default function ProfileInfo() {
+  const [isCvOpen, setIsCvOpen] = useState(false);
+
   return (
     <div className="profile-info">
       <div className="profile-header">
@@ -71,11 +76,54 @@ export default function ProfileInfo() {
           <IconFilled name="linkedin" size={20} />
           LinkedIn
         </a>
-        <a href="/Patcharapon_CV.pdf" className="btn btn-primary" download="Patcharapon_CV.pdf">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => setIsCvOpen(true)}
+        >
           <Icon name="download" size={20} />
           Download CV
-        </a>
+        </button>
       </div>
+
+      {isCvOpen && (
+        <div
+          className="cv-modal-overlay"
+          onClick={() => setIsCvOpen(false)}
+        >
+          <div
+            className="cv-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="cv-modal-header">
+              <h3>Patcharapon_CV.pdf</h3>
+              <div className="cv-modal-actions">
+                <a
+                  href="/Patcharapon_CV.pdf"
+                  download="Patcharapon_CV.pdf"
+                  className="btn btn-outline"
+                >
+                  <Icon name="download" size={18} />
+                  Download
+                </a>
+                <button
+                  type="button"
+                  className="cv-modal-close"
+                  onClick={() => setIsCvOpen(false)}
+                  aria-label="Close"
+                >
+                  &times;
+                </button>
+              </div>
+            </div>
+            <iframe
+              src="/Patcharapon_CV.pdf"
+              title="Patcharapon CV"
+              className="cv-modal-frame"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

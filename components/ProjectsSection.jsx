@@ -2,7 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "./Icon";
+import Reveal from "./Reveal";
 import { projects } from "../lib/data";
+
+function handleTiltMove(e) {
+  if (window.matchMedia("(pointer: coarse)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const card = e.currentTarget;
+  const rect = card.getBoundingClientRect();
+  const px = (e.clientX - rect.left) / rect.width - 0.5;
+  const py = (e.clientY - rect.top) / rect.height - 0.5;
+  card.style.transform = `perspective(900px) translateY(-4px) rotateX(${(-py * 8).toFixed(2)}deg) rotateY(${(px * 10).toFixed(2)}deg)`;
+}
+
+function handleTiltLeave(e) {
+  e.currentTarget.style.transform = "";
+}
 
 function Lightbox({ image, onClose }) {
   useEffect(() => {
@@ -33,18 +48,18 @@ function Lightbox({ image, onClose }) {
   );
 }
 
-function ProjectCard({ project, onImageClick }) {
+function ProjectCard({ project, index, onImageClick }) {
   return (
-    <div className="project-card card">
+    <Reveal
+      as="div"
+      className="project-card card"
+      delay={Math.min(index, 5) * 60}
+      onMouseMove={handleTiltMove}
+      onMouseLeave={handleTiltLeave}
+    >
       <div className="project-card-body">
         <div className="project-card-top">
-          <div className="project-title-wrapper">
-            <h3 className="project-title">{project.title}</h3>
-            <span className={`project-status status-${(project.status || "Finished").toLowerCase()}`}>
-              <span className="status-dot"></span>
-              {project.status || "Finished"}
-            </span>
-          </div>
+          <h3 className="project-title">{project.title}</h3>
           <p className="project-description">{project.description}</p>
         </div>
 
@@ -101,7 +116,7 @@ function ProjectCard({ project, onImageClick }) {
           </div>
         </div>
       )}
-    </div>
+    </Reveal>
   );
 }
 
@@ -172,8 +187,13 @@ export default function ProjectsSection() {
 
       <div className="projects-carousel-container" id="projects-carousel-container">
         <div className="projects-track" id="projects-track" ref={trackRef}>
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} onImageClick={setLightboxImage} />
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              index={index}
+              onImageClick={setLightboxImage}
+            />
           ))}
           {Array.from({ length: placeholders }).map((_, i) => (
             <div
