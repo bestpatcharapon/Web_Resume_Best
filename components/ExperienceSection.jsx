@@ -7,6 +7,21 @@ function TimelineItem({ experience, active, delay }) {
     <Reveal as="div" className="timeline-item" delay={delay}>
       <div className={`timeline-marker ${active ? "active" : ""}`}></div>
       <div className={`timeline-content ${active ? "active" : ""}`}>
+        {experience.image && (
+          <div className="timeline-image-preview" aria-hidden="true">
+            <div className="timeline-preview-header">
+              <span className="timeline-preview-dot"></span>
+              <span>Project preview</span>
+            </div>
+            <div className="timeline-preview-stage">
+              <img src={experience.image} alt="" loading="lazy" />
+            </div>
+            <div className="timeline-preview-copy">
+              <div className="timeline-preview-caption">{experience.title}</div>
+              <p className="timeline-preview-description">{experience.description}</p>
+            </div>
+          </div>
+        )}
         <div className="timeline-period-wrapper">
           <div className="timeline-period">{experience.period}</div>
           {experience.duration && (
@@ -19,6 +34,17 @@ function TimelineItem({ experience, active, delay }) {
           {experience.company}
         </p>
         <p className="timeline-description">{experience.description}</p>
+        {experience.link && (
+          <a
+            className="timeline-link"
+            href={experience.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {experience.linkLabel || "View project"}
+            <i className="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        )}
         {experience.tags?.length > 0 && (
           <div className="timeline-tags">
             {experience.tags.map((tag) => (
@@ -42,7 +68,7 @@ export default function ExperienceSection() {
           Experience <span className="header-count-badge">{experiences.length}</span>
         </h2>
       </div>
-      <p className="section-subtitle">My professional journey and internship experiences</p>
+      <p className="section-subtitle">Professional experience, selected projects, and contributions</p>
 
       <div className="timeline">
         {experiences.map((exp, index) => (

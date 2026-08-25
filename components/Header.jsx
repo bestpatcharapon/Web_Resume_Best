@@ -6,7 +6,6 @@ import { Icon } from "./Icon";
 const LINKS = [
   { id: "about", icon: "user", label: "About" },
   { id: "skills", icon: "code", label: "Skills" },
-  { id: "projects", icon: "folder", label: "Projects" },
   { id: "experience", icon: "briefcase", label: "Experience" },
 ];
 

@@ -51,7 +51,6 @@ export default function Chatbot() {
   const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesRef = useRef(null);
   const inputRef = useRef(null);
-  const widgetRef = useRef(null);
 
   useEffect(() => {
     const el = messagesRef.current;
@@ -61,16 +60,7 @@ export default function Chatbot() {
   useEffect(() => {
     if (!isOpen) return;
     const t = setTimeout(() => inputRef.current?.focus(), 300);
-    const onOutsideClick = (e) => {
-      if (widgetRef.current && !widgetRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("click", onOutsideClick);
-    return () => {
-      clearTimeout(t);
-      document.removeEventListener("click", onOutsideClick);
-    };
+    return () => clearTimeout(t);
   }, [isOpen]);
 
   const sendMessage = async (textOverride) => {
@@ -105,12 +95,13 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="chatbot-widget" id="chatbotWidget" ref={widgetRef}>
+    <div className="chatbot-widget" id="chatbotWidget">
       <button
+        type="button"
         className="chatbot-toggle"
         id="chatbotToggle"
         title="Chat with AI Assistant"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen((open) => !open)}
       >
         <svg
           className="chat-icon"
@@ -152,7 +143,7 @@ export default function Chatbot() {
               </span>
             </div>
           </div>
-          <button className="chatbot-close" id="chatbotClose" onClick={() => setIsOpen(false)}>
+          <button type="button" className="chatbot-close" id="chatbotClose" onClick={() => setIsOpen(false)}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -197,7 +188,7 @@ export default function Chatbot() {
           {showSuggestions && (
             <div className="chatbot-suggestions" id="chatbotSuggestions">
               {SUGGESTIONS.map((s) => (
-                <button key={s.prompt} className="suggestion-chip" onClick={() => sendMessage(s.prompt)}>
+                <button type="button" key={s.prompt} className="suggestion-chip" onClick={() => sendMessage(s.prompt)}>
                   {s.label}
                 </button>
               ))}

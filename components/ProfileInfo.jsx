@@ -8,16 +8,20 @@ const INFO_CARDS = [
   { icon: "location", title: "Location", value: "Chiang Mai, TH" },
   { icon: "email", title: "Email", value: "Patcharaponyo65@gmail.com" },
   { icon: "cake", title: "Birthday", value: "December 4, 2003" },
-  { icon: "graduation", title: "Faculty", value: "Computer Engineering" },
-  {
-    icon: "graduation",
-    title: "University",
-    value: "Rajamangala University of Technology Lanna, Thailand",
-  },
   {
     icon: "sparkle",
-    title: "Primary Tools",
-    value: "Ruby on Rails · Bruno · Manual Testing",
+    title: "Specialization",
+    value: "Quality Assurance & AI Testing",
+  },
+  {
+    icon: "graduation",
+    title: "Education",
+    value: "Bachelor of Electrical Engineering in Computer Engineering",
+    details: [
+      "Rajamangala University of Technology Lanna",
+      "2025 - 2026 · Cumulative GPA 3.37 · Second Class Honors",
+    ],
+    wide: true,
   },
 ];
 
@@ -47,11 +51,16 @@ export default function ProfileInfo() {
 
       <div className="info-grid">
         {INFO_CARDS.map((card) => (
-          <div className="info-card" key={card.title}>
+          <div className={`info-card ${card.wide ? "info-card-wide" : ""}`} key={card.title}>
             <Icon name={card.icon} size={20} />
             <div>
               <h3>{card.title}</h3>
               <p>{card.value}</p>
+              {card.details?.map((detail) => (
+                <span className="info-card-detail" key={detail}>
+                  {detail}
+                </span>
+              ))}
             </div>
           </div>
         ))}

@@ -2,7 +2,6 @@ import Header from "../components/Header";
 import ProfileStack from "../components/ProfileStack";
 import ProfileInfo from "../components/ProfileInfo";
 import SkillsSection from "../components/SkillsSection";
-import ProjectsSection from "../components/ProjectsSection";
 import ExperienceSection from "../components/ExperienceSection";
 import Chatbot from "../components/Chatbot";
 import ScrollProgress from "../components/ScrollProgress";
@@ -25,7 +24,6 @@ export default function Home() {
           </section>
 
           <SkillsSection />
-          <ProjectsSection />
           <ExperienceSection />
         </div>
       </div>
