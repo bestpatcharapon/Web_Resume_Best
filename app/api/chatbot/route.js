@@ -1,6 +1,7 @@
 import { experiences, projects, techSkillsGrouped } from "../../../lib/data";
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+const GROQ_MODEL = process.env.GROQ_MODEL || "openai/gpt-oss-120b";
 
 function buildSystemPrompt() {
   const skillsText = techSkillsGrouped
@@ -36,8 +37,9 @@ function buildSystemPrompt() {
 
 ======= การศึกษา =======
 - มหาวิทยาลัย: Rajamangala University of Technology Lanna (มทร.ล้านนา)
-- คณะ: Computer Engineering (วิศวกรรมคอมพิวเตอร์)
-- ปีการศึกษา: 2022-2026
+- ปริญญา: Bachelor of Electrical Engineering in Computer Engineering
+- ปีการศึกษา: 2025-2026
+- เกรดเฉลี่ยสะสม: 3.37 (Second Class Honors)
 
 ======= ประสบการณ์ (Experiences) =======
 ${expText}
@@ -88,26 +90,31 @@ async function callGroq(apiKey, prompt) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model: GROQ_MODEL,
         messages: [
           { role: "system", content: systemMessage },
           { role: "user", content: prompt },
         ],
+        reasoning_effort: "low",
         temperature: 0.7,
         max_tokens: 1024,
       }),
       signal: AbortSignal.timeout(30000),
     });
 
-    const body = await response.json();
+    const body = await response.json().catch(() => ({}));
     const content = body?.choices?.[0]?.message?.content;
 
     if (response.status === 200 && content) {
       return { success: true, message: content };
     }
     if (response.status === 429) {
-      return { success: false, message: "Rate limited" };
+      return { success: false, message: "AI มีผู้ใช้งานจำนวนมาก กรุณาลองใหม่อีกครั้งครับ 😅" };
     }
+    console.error(
+      `Groq API error (${response.status}):`,
+      body?.error?.message || "Unknown error"
+    );
     return { success: false, message: "เกิดข้อผิดพลาด กรุณาลองใหม่ 😅" };
   } catch (e) {
     console.error("Chatbot API error:", e.message);
